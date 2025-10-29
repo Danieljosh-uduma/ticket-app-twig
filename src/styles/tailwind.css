@@ -29,5 +29,13 @@
   body {
     @apply max-w-[1440px] mx-auto
   }
-
+  input {
+    @apply w-full border text-black shadow-lg focus:outline-[#0066FF] focus:shadow-[#0066FF21] rounded-lg h-10 px-4
+  }
+  .error-input {
+    @apply border-red-300! shadow-red-50!
+  }
+  .correct-input {
+    @apply border-black!
+  }
 }

@@ -26,6 +26,21 @@ switch($path){
             'title'=> "Dashboard - Twig Starter Template",
         ]);
         break;
+    case '/login':
+        echo $twig->render('login.twig',[
+            'title'=> "Dashboard - Twig Starter Template",
+        ]);
+        break;
+    case '/signup':
+        echo $twig->render('signup.twig',[
+            'title'=> "Dashboard - Twig Starter Template",
+        ]);
+        break;
+    case '/ticket':
+        echo $twig->render('ticket.twig',[
+            'title'=> "Dashboard - Twig Starter Template",
+        ]);
+        break;
     default:
     echo $twig->render('404.twig',[
         'title'=> "404 Not Found - Twig Starter Template",

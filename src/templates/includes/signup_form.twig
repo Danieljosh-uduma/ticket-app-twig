@@ -1,0 +1,144 @@
+{% block content %}
+    <form
+        action=""
+        class="container flex flex-col gap-4 relative w-full z-50 overflow-hidden"
+    >
+        <div id="message" class="border-l-4  shadow-md relative transition-all duration-300 ease-in  px-4 py-2 rounded-lg"></div>
+
+        <label for="fullname" class="flex flex-col gap-3 font-bold">
+            Fullname
+            <input
+                type="text"
+                id="fullname"
+                placeholder="John Doe"
+                required
+            />
+            <span aria-live="polite" class="text-red-400 text-sm font-medium"></span>
+        </label>
+        <label for="email" class="flex flex-col gap-3 font-bold">
+            Email
+            <input
+                type="email"
+                id="email"
+                placeholder="johndoe@gmail.com"
+                required
+            />
+            <span aria-live="polite" class="text-red-400 text-sm font-medium"></span>
+        </label>
+        <label for="phoneNumber" class="flex flex-col gap-3 font-bold">
+            Phone Number
+            <input
+                type="tel"
+                id="phoneNumber"
+                placeholder="080292928374"
+                required
+            />
+            <span aria-live="polite" class="text-red-400 text-sm font-medium"></span>
+        </label>
+        <label for="password" class="flex flex-col gap-3 font-bold">
+            Password
+            <input
+                type="password"
+                id="password"
+                placeholder="*******"
+                required
+            />
+            <span aria-live="polite" class="text-red-400 text-sm font-medium"></span>
+        </label>
+
+        <button
+        type="submit"
+        class="bg-[#0066FF] text-white py-2.5 w-1/3 mx-auto rounded-3xl font-bold"
+        >Sign up</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const form = document.querySelector('form');
+        const nameLabel = document.querySelector('label[for="fullname"]');
+        const nameInput = document.querySelector('input[id="fullname"]');
+        const emailLabel = document.querySelector('label[for="email"]');
+        const emailInput = document.querySelector('input[id="email"]');
+        const numberLabel = document.querySelector('label[for="phoneNumber"]');
+        const numberInput = document.querySelector('input[id="phoneNumber"]');
+        const passwordLabel = document.querySelector('label[for="password"]');
+        const passwordInput = document.querySelector('input[id="password"]');
+        let nameValid, emailValid, subjectValid, messageValid = false;
+        const message = document.getElementById("message")
+
+        nameInput.addEventListener('input', () => {
+            const error = nameLabel.querySelector('span');
+            if (nameInput.value !== "" && nameInput.value.match("[a-zA-Z]+ [a-zA-Z]+")) {
+                error.textContent = "";
+                nameInput.classList.remove("error-input")
+                nameInput.classList.add("correct-input")
+                nameValid = true;
+            } else {
+                error.textContent = "Please enter your full name.(i.e First and Last name)";
+                nameInput.classList.remove("correct-input")
+                nameInput.classList.add("error-input")
+                nameValid = false;
+            }
+        })
+        emailInput.addEventListener('input', () => {
+            const error = emailLabel.querySelector('span');
+            if (emailInput.value.match('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,}$')) {
+                error.textContent = "";
+                emailInput.classList.remove("error-input")
+                emailInput.classList.add("correct-input")
+                nameValid = true;
+            } else {
+                error.textContent = "Enter vaild email (i.e johndoe@example.com)";
+                emailInput.classList.remove("correct-input")
+                emailInput.classList.add("error-input")
+                nameValid = false;
+            }
+        })
+        numberInput.addEventListener('input', () => {
+            const error = numberLabel.querySelector('span');
+            if (numberInput.value.length > 0 && numberInput.value.match('[0-9]+') && numberInput.value.length === 11 && !isNaN(Number(numberInput.value))) {
+                error.textContent = "";
+                numberInput.classList.remove("error-input")
+                numberInput.classList.add("correct-input")
+                nameValid = true;
+            } else {
+                error.textContent = "Enter vaild email (i.e johndoe.example.com)";
+                numberInput.classList.remove("correct-input")
+                numberInput.classList.add("error-input")
+                nameValid = false;
+            }
+        })
+        passwordInput.addEventListener('input', () => {
+            const error = passwordLabel.querySelector('span');
+            if (passwordInput.value.length > 0 && passwordInput.value.length >= 8) {
+                error.textContent = "";
+                passwordInput.classList.remove("error-input")
+                passwordInput.classList.add("correct-input")
+                nameValid = true;
+            } else {
+                error.textContent = "Enter vaild email (i.e johndoe.example.com)";
+                passwordInput.classList.remove("correct-input")
+                passwordInput.classList.add("error-input")
+                nameValid = false;
+            }
+        })
+
+        form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        if (nameValid && emailValid && subjectValid && messageValid) {
+            successMessage.classList.add("show")
+            form.reset();
+            nameLabel.classList.remove("success-label")
+            emailLabel.classList.remove("success-label")
+            subjectLabel.classList.remove("success-label")
+            messageLabel.classList.remove("success-label")
+            setInterval(() => {
+                successMessage.classList.remove("show")
+            }, 3000)
+        } else {
+            message.textContent = "fill out the form"
+        }
+        })
+    </script>
+{% endblock %}
