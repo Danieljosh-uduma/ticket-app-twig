@@ -9,7 +9,7 @@
             Stay organized with our easy-to-use task management tool designed for everyone. Track your
             tasks effortlessly and boost your productivity with our intuitive interface.
         </p>
-        <button
+        <button id="btn-hero"
             class="bg-[#e7008a] text-white font-semibold px-6 py-3 mt-8 rounded-lg text-lg"
             >Getting Started</button
         >
@@ -27,6 +27,10 @@
 
 {% block scripts %}
     <script>
-        
+        const BtnElem = document.getElementById("btn-hero")
+
+        BtnElem.addEventListener("click", () => {
+            window.location = "/login"
+        })
     </script>
 {% endblock %}

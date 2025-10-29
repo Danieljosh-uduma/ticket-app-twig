@@ -9,9 +9,9 @@
 
     <main>
         {% include './includes/hero_section.twig' %}
-        {# <HeroSection /> #}
-        {# <HowItWorks /> #}
-        {# <TestimonialList /> #}
+        {% include "./includes/how_it_works.twig" %}
+        {% include "./includes/testimonial_list.twig" %}
     </main>
+    {% include "./includes/footer.twig" %}
     {# <FooterElem /> #}
 {% endblock %}

@@ -1,0 +1,30 @@
+{% block content %}
+    <section class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-12">How it works.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                {% include "./includes/basic_card.twig" with {
+                    title: "Create Tickets", 
+                    description: "Effortlessly create new tickets for any task or issue. Our intuitive interface makes it quick and simple to log details.", 
+                    icon: "icon"
+                    } 
+                %}
+
+                {% include "./includes/basic_card.twig" with {
+                    title: "Track Progress", 
+                    description: "Monitor the status of your tickets from 'To Do' to 'Done' with our visual tracking board.",
+                    icon: "icon"
+                    } 
+                %}
+                {% include "./includes/basic_card.twig" with {
+                    title: "Get Notified", 
+                    description: "Receive real-time notifications about updates and comments on your tickets.", 
+                    icon: "icon"
+                    } 
+                %}
+                
+            </div>
+        </div>
+    </section>
+{% endblock %}

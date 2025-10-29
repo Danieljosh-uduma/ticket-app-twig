@@ -1,1 +1,2 @@
-navigator
+
+window.location = "/login"
