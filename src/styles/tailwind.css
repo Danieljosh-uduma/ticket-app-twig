@@ -38,4 +38,7 @@
   .correct-input {
     @apply border-black!
   }
+  .success-message {
+    @apply border-l-teal-400 opacity-100! left-0!
+  }
 }

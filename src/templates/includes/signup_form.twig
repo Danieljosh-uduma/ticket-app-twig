@@ -3,7 +3,9 @@
         action=""
         class="container flex flex-col gap-4 relative w-full z-50 overflow-hidden"
     >
-        <div id="message" class="border-l-4  shadow-md relative transition-all duration-300 ease-in  px-4 py-2 rounded-lg"></div>
+        <div id="message" class="border-l-4  shadow-md relative transition-all duration-300 ease-in  px-4 py-2 rounded-lg opacity-0 left-[50%]">
+            signed in successfully
+        </div>
 
         <label for="fullname" class="flex flex-col gap-3 font-bold">
             Fullname
@@ -54,7 +56,9 @@
 {% endblock %}
 
 {% block scripts %}
-    <script>
+    <script type="module">
+        import { createToken } from "/server/token.js"
+
         const form = document.querySelector('form');
         const nameLabel = document.querySelector('label[for="fullname"]');
         const nameInput = document.querySelector('input[id="fullname"]');
@@ -64,7 +68,7 @@
         const numberInput = document.querySelector('input[id="phoneNumber"]');
         const passwordLabel = document.querySelector('label[for="password"]');
         const passwordInput = document.querySelector('input[id="password"]');
-        let nameValid, emailValid, subjectValid, messageValid = false;
+        let nameValid, emailValid, numberValid, passwordValid = false;
         const message = document.getElementById("message")
 
         nameInput.addEventListener('input', () => {
@@ -87,12 +91,12 @@
                 error.textContent = "";
                 emailInput.classList.remove("error-input")
                 emailInput.classList.add("correct-input")
-                nameValid = true;
+                emailValid = true;
             } else {
                 error.textContent = "Enter vaild email (i.e johndoe@example.com)";
                 emailInput.classList.remove("correct-input")
                 emailInput.classList.add("error-input")
-                nameValid = false;
+                emailValid = false;
             }
         })
         numberInput.addEventListener('input', () => {
@@ -101,12 +105,12 @@
                 error.textContent = "";
                 numberInput.classList.remove("error-input")
                 numberInput.classList.add("correct-input")
-                nameValid = true;
+                numberValid = true;
             } else {
                 error.textContent = "Enter vaild email (i.e johndoe.example.com)";
                 numberInput.classList.remove("correct-input")
                 numberInput.classList.add("error-input")
-                nameValid = false;
+                numberValid = false;
             }
         })
         passwordInput.addEventListener('input', () => {
@@ -115,27 +119,26 @@
                 error.textContent = "";
                 passwordInput.classList.remove("error-input")
                 passwordInput.classList.add("correct-input")
-                nameValid = true;
+                passwordValid = true;
             } else {
                 error.textContent = "Enter vaild email (i.e johndoe.example.com)";
                 passwordInput.classList.remove("correct-input")
                 passwordInput.classList.add("error-input")
-                nameValid = false;
+                passwordValid = false;
             }
         })
-
+        const generateToken = () => {
+            return createToken(fullname.value, email.value)
+        }
         form.addEventListener('submit', (e) => {
         e.preventDefault();
-        if (nameValid && emailValid && subjectValid && messageValid) {
-            successMessage.classList.add("show")
+        if (nameValid && emailValid && numberValid && passwordValid) {
+            message.classList.add("success-message")
             form.reset();
-            nameLabel.classList.remove("success-label")
-            emailLabel.classList.remove("success-label")
-            subjectLabel.classList.remove("success-label")
-            messageLabel.classList.remove("success-label")
             setInterval(() => {
-                successMessage.classList.remove("show")
+                message.classList.remove("success-message")
             }, 3000)
+            window.location.href = "/dashboard"
         } else {
             message.textContent = "fill out the form"
         }

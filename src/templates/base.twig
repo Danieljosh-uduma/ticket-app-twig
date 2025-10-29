@@ -17,8 +17,11 @@
         {% endblock %}
         
         {% block scripts %}
-            {# Import or write javascript directly inhere #}
-            {# <script src="script.js"></script> #}
+            <script type="module">
+                {# import { makeServer } from "/server/server.js"
+
+                makeServer() #}
+            </script>
         {% endblock %}
     </body>
 </html>
